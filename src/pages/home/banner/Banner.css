@@ -1,0 +1,9 @@
+.carousel {
+    text-align: center;
+}
+.carousel .control-dots .dot{
+    background: #fff;
+}
+.carousel .control-dots .dot.selected{
+    background: #007AFF;
+}
