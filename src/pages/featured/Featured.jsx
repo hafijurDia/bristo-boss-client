@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import SectionTitle from '../../shared/components/SectionTitle';
 import feturedImg from '../../assets/home/featured.jpg';
 import './Featured.css';
 
 const Featured = () => {
+
     return (
         <div className='feature-section'>
             <div className="container mx-auto">
@@ -30,7 +31,7 @@ const Featured = () => {
       <p className="mb-5">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Error voluptate facere, deserunt dolores maiores quod nobis quas quasi. Eaque repellat recusandae ad laudantium tempore consequatur consequuntur omnis ullam maxime tenetur.
       </p> 
-      <button className="btn btn-primary ">Read More</button>
+      <button className="btn btn-primary border-0 border-b-2 border-yellow-500 hover:border-orange-500 bg-white text-orange-500 hover:bg-gray-700 ">Read More</button>
     </div>
   </div>
 </div>
