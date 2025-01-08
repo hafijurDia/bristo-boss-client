@@ -6,11 +6,11 @@ import { Link } from 'react-router-dom';
 const Header = () => {
     const navOptions = <>
     <li><Link className='uppercase font-semibold' to="/">Home</Link></li>
-    <li><Link className='uppercase font-semibold' to="/menu">Contact Us</Link></li>
-    <li><Link className='uppercase font-semibold' to="/menu">Dashboard</Link></li>
+    <li><Link className='uppercase font-semibold' to="/contact">Contact Us</Link></li>
+    <li><Link className='uppercase font-semibold' to="/dashboard">Dashboard</Link></li>
     <li><Link className='uppercase font-semibold' to="/menu">Our Menu</Link></li>
-    <li><Link className='uppercase font-semibold' to="/menu">Our Shop</Link></li>
-    <li><Link className='uppercase font-semibold' to="/menu">Sign Out</Link></li>
+    <li><Link className='uppercase font-semibold' to="/shop">Our Shop</Link></li>
+    <li><Link className='uppercase font-semibold' to="/signOut">Sign Out</Link></li>
     
     </>
     return (
