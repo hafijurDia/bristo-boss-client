@@ -8,6 +8,7 @@ import CallUs from '../../../shared/callUs/CallUs';
 import ReconmendedItem from '../recomendedItem/ReconmendedItem';
 import Featured from '../../featured/Featured';
 import Testimonial from '../testimonial/Testimonial';
+import { Helmet } from 'react-helmet-async';
 
 
 
@@ -15,6 +16,9 @@ import Testimonial from '../testimonial/Testimonial';
 const Home = () => {
     return (
         <>
+           <Helmet>
+                <title>Bistro Boss | Home</title>
+              </Helmet>
            <Banner></Banner>
            <Category></Category>
            <BristoBoss></BristoBoss>

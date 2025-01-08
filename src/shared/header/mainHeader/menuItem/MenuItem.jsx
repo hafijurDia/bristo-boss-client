@@ -14,6 +14,7 @@ const MenuItem = ({item}) => {
                 </div>
                 <p className='text-lg font-semibold text-orange-500 '>${price}</p>
             </div>
+            
         </div>
     );
 };

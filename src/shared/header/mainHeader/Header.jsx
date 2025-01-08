@@ -1,20 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import logo from '../../../assets/logo-bristo.png';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const navOptions = <>
-    <li><a>Item 1</a></li>
-      <li>
-        <details>
-          <summary>Parent</summary>
-          <ul className="p-2">
-            <li><a>Submenu 1</a></li>
-            <li><a>Submenu 2</a></li>
-          </ul>
-        </details>
-      </li>
-      <li><a>Item 3</a></li>
+    <li><Link className='uppercase font-semibold' to="/">Home</Link></li>
+    <li><Link className='uppercase font-semibold' to="/menu">Contact Us</Link></li>
+    <li><Link className='uppercase font-semibold' to="/menu">Dashboard</Link></li>
+    <li><Link className='uppercase font-semibold' to="/menu">Our Menu</Link></li>
+    <li><Link className='uppercase font-semibold' to="/menu">Our Shop</Link></li>
+    <li><Link className='uppercase font-semibold' to="/menu">Sign Out</Link></li>
+    
     </>
     return (
         <div className='fixed z-10 w-full bg-opacity-20 bg-black text-white'>
@@ -41,7 +38,7 @@ const Header = () => {
        {navOptions}
       </ul>
     </div>
-    <a className="" href='#'><img className='w-4/5' src={logo} alt="" /></a>
+    <Link to="/"><img className='w-4/5' src={logo} alt="" /></Link>
   </div>
   <div className="navbar-end hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
