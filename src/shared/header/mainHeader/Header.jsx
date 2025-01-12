@@ -9,7 +9,7 @@ const Header = () => {
     <li><Link className='uppercase font-semibold' to="/contact">Contact Us</Link></li>
     <li><Link className='uppercase font-semibold' to="/dashboard">Dashboard</Link></li>
     <li><Link className='uppercase font-semibold' to="/menu">Our Menu</Link></li>
-    <li><Link className='uppercase font-semibold' to="/shop">Our Shop</Link></li>
+    <li><Link className='uppercase font-semibold' to="/shop/salads">Our Shop</Link></li>
     <li><Link className='uppercase font-semibold' to="/signOut">Sign Out</Link></li>
     
     </>

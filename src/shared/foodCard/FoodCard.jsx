@@ -12,6 +12,7 @@ const FoodCard = ({item}) => {
           className="rounded-xl"
         />
       </figure>
+      <p className="absolute right-3 top-3 bg-gray-800 rounded-sm text-lg text-white px-1">${price}</p>
       <div className="card-body items-center text-center">
         <h2 className="card-title">{name}</h2>
         <p>{recipe}</p>

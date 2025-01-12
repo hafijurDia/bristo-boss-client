@@ -8,15 +8,23 @@ import "react-tabs/style/react-tabs.css";
 import useMenu from "../../hooks/useMenu";
 import FoodCard from "../../shared/foodCard/FoodCard";
 import "./OurShop.css";
+import { useParams } from "react-router-dom";
+import OrderTab from "./orderTab/OrderTab";
 
 const OurShop = () => {
-  const [tabIndex, setTabIndex] = useState(0);
+  const categories = ['salads', 'pizza', 'soups', 'desserts', 'drinks'];
+  const {category} = useParams();
+  const initialIndex = categories.indexOf(category);
+  const [tabIndex, setTabIndex] = useState(initialIndex);
   const [menu, loading] = useMenu(); // Destructure loading state from useMenu
+
+  console.log(category);
   const offered = menu.filter((item) => item.category === "offered");
   const desserts = menu.filter((item) => item.category === "dessert");
   const pizza = menu.filter((item) => item.category === "pizza");
   const salads = menu.filter((item) => item.category === "salad");
   const soups = menu.filter((item) => item.category === "soup");
+  const drinks = menu.filter((item) => item.category === "drinks");
   return (
     <div>
       <Helmet>
@@ -41,80 +49,20 @@ const OurShop = () => {
               <Tab>Drinks</Tab>
             </TabList>
             <TabPanel>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
-                {loading ? (
-                  // Show loading spinner or message while data is being fetched
-                  <div className="text-center my-10 flex flex-col justify-center items-center">
-                    <div className="loader" />{" "}
-                    {/* Replace with a spinner or animation */}
-                  </div>
-                ) : (
-                  salads.map((item) => (
-                    <FoodCard key={item._id} item={item}></FoodCard>
-                  ))
-                )}
-              </div>
-            </TabPanel>
-            <TabPanel>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
-                {loading ? (
-                  // Show loading spinner or message while data is being fetched
-                  <div className="text-center my-10 flex flex-col justify-center items-center">
-                    <div className="loader" />{" "}
-                    {/* Replace with a spinner or animation */}
-                  </div>
-                ) : (
-                  pizza.map((item) => (
-                    <FoodCard key={item._id} item={item}></FoodCard>
-                  ))
-                )}
-              </div>
-            </TabPanel>
-            <TabPanel>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
-                {loading ? (
-                  // Show loading spinner or message while data is being fetched
-                  <div className="text-center my-10 flex flex-col justify-center items-center">
-                    <div className="loader" />{" "}
-                    {/* Replace with a spinner or animation */}
-                  </div>
-                ) : (
-                  soups.map((item) => (
-                    <FoodCard key={item._id} item={item}></FoodCard>
-                  ))
-                )}
-              </div>
-            </TabPanel>
-            <TabPanel>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
-                {loading ? (
-                  // Show loading spinner or message while data is being fetched
-                  <div className="text-center my-10 flex flex-col justify-center items-center">
-                    <div className="loader" />{" "}
-                    {/* Replace with a spinner or animation */}
-                  </div>
-                ) : (
-                  desserts.map((item) => (
-                    <FoodCard key={item._id} item={item}></FoodCard>
-                  ))
-                )}
-              </div>
-            </TabPanel>
-            <TabPanel>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
-                {loading ? (
-                  // Show loading spinner or message while data is being fetched
-                  <div className="text-center my-10 flex flex-col justify-center items-center">
-                    <div className="loader" />{" "}
-                    {/* Replace with a spinner or animation */}
-                  </div>
-                ) : (
-                  offered.map((item) => (
-                    <FoodCard key={item._id} item={item}></FoodCard>
-                  ))
-                )}
-              </div>
-            </TabPanel>
+    <OrderTab items={salads} loading={loading}></OrderTab>
+</TabPanel>
+<TabPanel>
+    <OrderTab items={pizza} loading={loading}></OrderTab>
+</TabPanel>
+<TabPanel>
+    <OrderTab items={soups} loading={loading}></OrderTab>
+</TabPanel>
+<TabPanel>
+    <OrderTab items={desserts} loading={loading}></OrderTab>
+</TabPanel>
+<TabPanel>
+    <OrderTab items={drinks} loading={loading}></OrderTab>
+</TabPanel>
           </Tabs>
         </div>
       </div>

@@ -19,8 +19,9 @@ import OurShop from "../pages/ourShop/OurShop";
           path:"/menu",
           element:<OurMenu></OurMenu>
         },
+     
         {
-          path:"/shop",
+          path:"/shop/:category",
           element:<OurShop></OurShop>
         }
       ]

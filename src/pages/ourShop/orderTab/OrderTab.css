@@ -1,0 +1,12 @@
+.swiper {
+    padding-bottom: 30px;
+}
+.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal {
+
+    bottom: 0px;
+}
+.swiper-pagination-bullet {
+    width: 25px;
+    height: 25px;
+    color: #000;
+}

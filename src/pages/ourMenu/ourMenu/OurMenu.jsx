@@ -50,7 +50,7 @@ export default function OurMenu() {
       ></SectionBanner>
       <div className="py-10">
         <div className="container mx-auto">
-          <MenuCategory items={desserts}></MenuCategory>
+          <MenuCategory items={desserts} title={'desserts'}></MenuCategory>
         </div>
       </div>
       {/* ========================= */}
@@ -63,7 +63,7 @@ export default function OurMenu() {
       ></SectionBanner>
       <div className="py-10">
         <div className="container mx-auto">
-          <MenuCategory items={pizza}></MenuCategory>
+          <MenuCategory items={pizza} title={'pizza'}></MenuCategory>
         </div>
       </div>
       {/* ========================= */}
@@ -76,7 +76,7 @@ export default function OurMenu() {
       ></SectionBanner>
       <div className="py-10">
         <div className="container mx-auto">
-          <MenuCategory items={salads}></MenuCategory>
+          <MenuCategory items={salads} title={'salads'}></MenuCategory>
         </div>
       </div>
       {/* ========================= */}
@@ -89,7 +89,7 @@ export default function OurMenu() {
       ></SectionBanner>
       <div className="py-10">
         <div className="container mx-auto">
-          <MenuCategory items={soups}></MenuCategory>
+          <MenuCategory items={soups} title={'soups'}></MenuCategory>
         </div>
       </div>
     </div>
