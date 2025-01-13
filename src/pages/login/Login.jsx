@@ -1,14 +1,38 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import loginImg from '../../assets/others/authentication2.png'
 import loginBg from '../../assets/others/authentication.png'
 import { TiSocialFacebook } from "react-icons/ti";
 import { RiGoogleLine } from "react-icons/ri";
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
+import { AuthContext } from "../../providers/AuthProvider";
+import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
     const captchaRef = useRef(null);
     const [disabled, setDisabled] = useState(true);
+    const {signIn} = useContext(AuthContext);
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+        signIn(email, password)
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            // ...
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+          });
+
+    }
+
     useEffect(()=>{
         loadCaptchaEnginge(6); 
     },[])
@@ -30,6 +54,9 @@ const Login = () => {
         
       }}
     >
+        <Helmet>
+                <title>Bistro Boss | Login</title>
+                </Helmet>
         <div className="container mx-auto">
         <div className="flex flex-col md:flex-row min-h-screen">
       {/* Left Side: Image Section */}
@@ -44,9 +71,10 @@ const Login = () => {
       {/* Right Side: Login Form Section */}
       <div className="w-full md:w-1/2 flex items-center justify-center p-6">
         <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-8">
-          <h2 className="text-2xl font-bold text-center mb-6">Sign In</h2>
+          <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
 
-          {/* Email Input */}
+         <form onSubmit={handleLogin}>
+             {/* Email Input */}
           <div className="mb-4">
             <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
               Email
@@ -101,14 +129,13 @@ const Login = () => {
           {/* Sign In Button */}
           <input disabled={disabled} type="submit" value="Login" className="w-full btn bg-blue-500 text-white py-2 rounded-lg font-medium hover:bg-blue-600" />
            
+         </form>
 
           {/* New Here? Create Account */}
           <div className="mt-4 text-center">
             <p className="text-sm text-gray-600">
               New here?{" "}
-              <a href="/register" className="text-blue-500 hover:underline">
-                Create an account
-              </a>
+              <Link to="/signup">Create an account</Link>
             </p>
           </div>
 
