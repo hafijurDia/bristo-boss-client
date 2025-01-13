@@ -1,24 +1,24 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
-import Header from '../shared/header/mainHeader/Header';
-import Footer from '../shared/footer/Footer';
-
-
+import React from "react";
+import { Outlet, useLocation } from "react-router-dom";
+import Header from "../shared/header/mainHeader/Header";
+import Footer from "../shared/footer/Footer";
 
 const Main = () => {
-    return (
-        <>
-        <Header></Header>
-            <Outlet></Outlet>
-            <Footer></Footer>
-        </>
-    );
+  const location = useLocation();
+  const noHeaderFooter = location.pathname.includes("login");
+  return (
+    <>
+      {
+        noHeaderFooter || <Header></Header>
+      }
+      <Outlet></Outlet>
+      {
+        noHeaderFooter || <Footer></Footer>
+      }
+    </>
+  );
 };
 
-
-Main.propTypes = {
-
-};
-
+Main.propTypes = {};
 
 export default Main;
