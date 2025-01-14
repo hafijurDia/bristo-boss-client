@@ -1,20 +1,35 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import logo from '../../../assets/logo-bristo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../providers/AuthProvider';
+import { FaRegUserCircle } from 'react-icons/fa';
 
 const Header = () => {
+  const {user, logOut} = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logOut()
+    .then(()=>{
+      navigate('/');
+    })
+    .catch(error => console.log(error));
+  }
+
     const navOptions = <>
     <li><Link className='uppercase font-semibold' to="/">Home</Link></li>
     <li><Link className='uppercase font-semibold' to="/contact">Contact Us</Link></li>
     <li><Link className='uppercase font-semibold' to="/dashboard">Dashboard</Link></li>
     <li><Link className='uppercase font-semibold' to="/menu">Our Menu</Link></li>
     <li><Link className='uppercase font-semibold' to="/shop/salads">Our Shop</Link></li>
-    <li><Link className='uppercase font-semibold' to="/signOut">Sign Out</Link></li>
     
+    {
+      user ? <><li><button className='uppercase font-semibold' onClick={handleLogout}>Logout <button><FaRegUserCircle /></button></button></li></>:<><li><Link className='uppercase font-semibold' to="/login">Login</Link></li></>
+    }
     </>
     return (
-        <div className='fixed z-10 w-full bg-opacity-20 bg-black text-white'>
+        <div className='  fixed z-10 w-full bg-opacity-20 bg-black text-white'>
             <div className="navbar md:px-10">
   <div className="navbar-start">
     <div className="dropdown">
@@ -40,7 +55,7 @@ const Header = () => {
     </div>
     <Link to="/"><img className='w-4/5' src={logo} alt="" /></Link>
   </div>
-  <div className="navbar-end hidden lg:flex">
+  <div className="navbar-end  hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
     {navOptions}
     </ul>

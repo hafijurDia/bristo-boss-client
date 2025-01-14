@@ -6,13 +6,17 @@ import { TiSocialFacebook } from "react-icons/ti";
 import { RiGoogleLine } from "react-icons/ri";
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from "../../providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
 
 const Login = () => {
-    const captchaRef = useRef(null);
     const [disabled, setDisabled] = useState(true);
     const {signIn} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location  = useLocation();
+
+    const from = location.state?.from?.pathname || "/";
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -23,12 +27,21 @@ const Login = () => {
         signIn(email, password)
         .then((userCredential) => {
             // Signed in 
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your work has been saved",
+                showConfirmButton: false,
+                timer: 1500
+              });
+              navigate(from, {replace:true});
             const user = userCredential.user;
             // ...
           })
           .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
+            console.log(errorMessage)
           });
 
     }
@@ -37,8 +50,8 @@ const Login = () => {
         loadCaptchaEnginge(6); 
     },[])
 
-    const handleValidCaptcha = () => {
-        const user_captcha_value = captchaRef.current.value;
+    const handleValidCaptcha = (e) => {
+        const user_captcha_value = e.target.value;
         if (validateCaptcha(user_captcha_value)==true) {
             setDisabled(false);
         }
@@ -114,16 +127,13 @@ const Login = () => {
               type="text"
               name="captcha"
               id="captcha"
-              ref={captchaRef}
+              onBlur={handleValidCaptcha}
               placeholder="Type captcha here"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           <div className="mb-4">
            
-          <button onClick={handleValidCaptcha} className="w-full bg-gray-500 text-white py-2 rounded-lg font-medium hover:bg-orange-600">
-            Validate
-          </button>
          </div>
 
           {/* Sign In Button */}
