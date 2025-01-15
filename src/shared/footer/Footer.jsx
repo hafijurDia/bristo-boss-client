@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const Footer = () => {
     return (
         <div className=' bg-neutral '>
-            <div class="container mx-auto">
+            <div className="container mx-auto">
             <footer className="footer text-neutral-content p-10">
   <aside>
     <svg

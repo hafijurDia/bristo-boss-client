@@ -7,9 +7,10 @@ import { RiGoogleLine } from "react-icons/ri";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -20,6 +21,7 @@ const SignUp = () => {
   
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
   
   const onSubmit = (data) => {
     if (data.password !== data.confirmPassword) {
@@ -34,6 +36,14 @@ const SignUp = () => {
         console.log(user);
         reset();
         // ...
+        updateUserProfile(data.name, data.photo)
+        .then(()=>{
+            console.log('user profile info updated')
+            navigate("/");
+        })
+        .catch(error=>{
+            console.log(error);
+        })
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -87,6 +97,26 @@ const SignUp = () => {
                   />
                   {errors.name && (
                     <span className="text-red-600">Name is required</span>
+                  )}
+                </div>
+
+                <div className="mb-4">
+                  <label
+                    htmlFor="name"
+                    className="block text-gray-700 font-medium mb-2"
+                  >
+                    Phot URL
+                  </label>
+                  <input
+                    type="text"
+                    id="photo"
+                    {...register("photo", { required: true })}
+                    name="photo"
+                    placeholder="Place your photo url"
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  {errors.photo && (
+                    <span className="text-red-600">photo is required</span>
                   )}
                 </div>
 

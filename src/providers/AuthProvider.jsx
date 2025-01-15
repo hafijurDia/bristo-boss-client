@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { app } from '../firebase/firebase.config';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -17,6 +17,12 @@ const AuthProvider = ({children}) => {
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
+    //update user profile 
+    const updateUserProfile = (name, photo) => {
+       return updateProfile(auth.currentUser, {
+            displayName: name, photoURL: photo
+          })
+    }
     //signIn user
     const signIn = (email, password) => {
         setLoading(true); // Fix the typo here
@@ -46,6 +52,7 @@ const AuthProvider = ({children}) => {
         createUser,
         signIn,
         logOut,
+        updateUserProfile,
     }
     return (
         <AuthContext.Provider value={authInfo}>

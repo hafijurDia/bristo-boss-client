@@ -38,7 +38,7 @@ const Testimonial = () => {
               className="mySwiper"
             >
               {reviews.map((item) => (
-                <SwiperSlide>
+                <SwiperSlide key={item._id}>
                   <div className="w-2/3 flex-none">
                     <div className="reviewbox flex items-center justify-center">
                       <Rating style={{ maxWidth: 180 }} value={item.rating} readOnly />
