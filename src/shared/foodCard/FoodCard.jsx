@@ -19,6 +19,7 @@ const FoodCard = ({item}) => {
       <div className="card-body items-center text-center">
         <h2 className="card-title">{name}</h2>
         <p>{recipe}</p>
+        <h4>Heleo</h4>
         <div className="card-actions">
         <button onClick={()=>handleAddToCart(item)} className="btn btn-primary bg-white border-0 border-b-2 border-orange-500 hover:border-orange-500 text-orange-500 hover:bg-gray-700 uppercase">
                 Add To Card
