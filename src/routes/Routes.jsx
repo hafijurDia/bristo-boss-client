@@ -25,7 +25,7 @@ import PrivateRoute from "./PrivateRoute";
      
         {
           path:"/shop/:category",
-          element:<PrivateRoute><OurShop></OurShop></PrivateRoute>
+          element:<OurShop></OurShop>
         },
         {
           path:"/login",
