@@ -4,10 +4,12 @@ import logo from '../../../assets/logo-bristo.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProvider';
 import { FaRegUserCircle, FaShoppingCart } from 'react-icons/fa';
+import UseCart from '../../../hooks/useCart';
 
 const Header = () => {
   const {user, logOut} = useContext(AuthContext);
   const navigate = useNavigate();
+  const [cart] = UseCart();
 
   const handleLogout = () => {
     logOut()
@@ -25,7 +27,7 @@ const Header = () => {
     <li><Link className='uppercase font-semibold' to="/shop/salads">Our Shop </Link></li>
     <li><button className="btn bg-transparent border-none uppercase font-semibold">
     <FaShoppingCart className='text-white' />
-  <div className="badge badge-secondary">+0</div>
+  <div className="badge badge-secondary">+{cart.length}</div>
 </button></li>
     {
       user ? 
