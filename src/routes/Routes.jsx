@@ -8,6 +8,7 @@ import SignUp from "../pages/signUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import Usercart from "../pages/dashboard/userDashboard/Usercart";
 import UserDashboard from "../layouts/UserDashboard";
+import UserHome from "../pages/dashboard/userDashboard/home/UserHome";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
     path: "/dashboard",
     element: <UserDashboard></UserDashboard>,
     children: [
+      {
+        path: "/dashboard/home",
+        element: <UserHome></UserHome>,
+      },
       {
         path: "/dashboard/cart",
         element: <Usercart></Usercart>,

@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../../shared/components/SectionTitle";
+import { FaDeleteLeft } from "react-icons/fa6";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const Usercart = () => {
   return (
@@ -44,7 +46,7 @@ const Usercart = () => {
             <table className="table rounded-sm">
               {/* head */}
               <thead>
-                <tr className="bg-orange-300 uppercase text-white">
+                <tr className="bg-orange-300 uppercase text-gray-900">
                   <th></th>
                   <th>Item Image</th>
                   <th>Item Name</th>
@@ -71,27 +73,7 @@ const Usercart = () => {
                   <td>Zemlak, Daniel and Leannon</td>
                   <td>$1.25</td>
                   <th>
-                    <button className="btn btn-ghost btn-xs">Delete</button>
-                  </th>
-                </tr>
-                <tr>
-                  <th>1</th>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle h-12 w-12">
-                          <img
-                            src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                            alt="Avatar Tailwind CSS Component"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>Zemlak, Daniel and Leannon</td>
-                  <td>$1.25</td>
-                  <th>
-                    <button className="btn btn-ghost btn-xs">Delete</button>
+                    <button className="btn btn-ghost btn-xs bg-red-600 w-[40px] h-[40px] hover:bg-black"><RiDeleteBin6Line className="text-3xl p-1 text-white" /></button>
                   </th>
                 </tr>
                 

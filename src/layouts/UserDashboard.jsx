@@ -7,7 +7,7 @@ import { Outlet } from 'react-router-dom';
 const UserDashboard = () => {
     return (
         <div className='bg-gray-200'>
-            <div className=' flex'>
+            <div className='flex'>
                 <div>
                     <UserDashboardNav></UserDashboardNav>
                 </div>

@@ -32,32 +32,32 @@ const UserDashboardNav = () => {
 
             {/* User Links */}
             <li>
-              <NavLink to="/user-home" activeClassName="font-bold" className="text-base">
+              <NavLink to="/dashboard/home" activeClassName="font-bold" className="text-base">
                 <FaHome className="mr-2" /> User Home
               </NavLink>
             </li>
             <li>
-              <NavLink to="/reservation" activeClassName="font-bold" className="text-base">
+              <NavLink to="/dashboard/reservation" activeClassName="font-bold" className="text-base">
                 <FaCalendarAlt className="mr-2" /> Reservation
               </NavLink>
             </li>
             <li>
-              <NavLink to="/payment-history" activeClassName="font-bold" className="text-base">
+              <NavLink to="/dashboard/payment-history" activeClassName="font-bold" className="text-base">
                 <FaHistory className="mr-2" /> Payment History
               </NavLink>
             </li>
             <li>
-              <NavLink to="/my-cart" activeClassName="font-bold" className="text-base">
+              <NavLink to="/dashboard/cart" activeClassName="font-bold" className="text-base">
                 <FaShoppingCart className="mr-2" /> My Cart
               </NavLink>
             </li>
             <li>
-              <NavLink to="/add-review" activeClassName="font-bold" className="text-base">
+              <NavLink to="/dashboard/add-review" activeClassName="font-bold" className="text-base">
                 <FaStar className="mr-2" /> Add Review
               </NavLink>
             </li>
             <li>
-              <NavLink to="/my-booking" activeClassName="font-bold" className="text-base">
+              <NavLink to="/dashboard/my-booking" activeClassName="font-bold" className="text-base">
                 <FaBook className="mr-2" /> My Booking
               </NavLink>
             </li>
