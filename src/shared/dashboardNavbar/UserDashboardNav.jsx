@@ -2,8 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import { FaHome, FaCalendarAlt, FaHistory, FaShoppingCart, FaStar, FaBook, FaUtensils, FaShopify, FaPhoneAlt } from "react-icons/fa";
+import UseCart from "../../hooks/useCart";
 
 const UserDashboardNav = () => {
+    const [cart] = UseCart();
   return (
     <div>
       <div className="drawer lg:drawer-open">
@@ -17,7 +19,7 @@ const UserDashboardNav = () => {
             Open drawer
           </label>
         </div>
-        <div className="drawer-side">
+        <div className="drawer-side sticky">
           <label
             htmlFor="my-drawer-2"
             aria-label="close sidebar"
@@ -48,7 +50,7 @@ const UserDashboardNav = () => {
             </li>
             <li>
               <NavLink to="/dashboard/cart" activeClassName="font-bold" className="text-base">
-                <FaShoppingCart className="mr-2" /> My Cart
+                <FaShoppingCart className="mr-2" /> My Cart ({cart.length})
               </NavLink>
             </li>
             <li>
@@ -77,7 +79,7 @@ const UserDashboardNav = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/shop" activeClassName="font-bold" className="text-base">
+              <NavLink to="/shop/salads" activeClassName="font-bold" className="text-base">
                 <FaShopify className="mr-2" /> Shop
               </NavLink>
             </li>
@@ -96,3 +98,6 @@ const UserDashboardNav = () => {
 UserDashboardNav.propTypes = {};
 
 export default UserDashboardNav;
+
+
+
