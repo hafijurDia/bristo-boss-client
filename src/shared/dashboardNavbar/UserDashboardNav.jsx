@@ -19,7 +19,7 @@ const UserDashboardNav = () => {
             Open drawer
           </label>
         </div>
-        <div className="drawer-side sticky">
+        <div className="drawer-side">
           <label
             htmlFor="my-drawer-2"
             aria-label="close sidebar"

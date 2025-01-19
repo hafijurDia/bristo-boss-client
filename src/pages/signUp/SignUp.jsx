@@ -8,48 +8,67 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
+import UseAxiosPublic from "../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
+import SocialLogin from "../../socialLogin/SocialLogin";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
-    watch,
     reset,
     formState: { errors },
   } = useForm();
-  
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
-  
+  const axiosPublic = UseAxiosPublic();
+
   const onSubmit = (data) => {
     if (data.password !== data.confirmPassword) {
       alert("Passwords do not match");
       return;
     }
-    
+
     createUser(data.email, data.password)
-    .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-        console.log(user);
-        reset();
+      .then((userCredential) => {
+        // create user data entry in database
+        const userInfo = {
+          name: data.name,
+          email: data.email,
+        }
+        axiosPublic.post('/users',userInfo)
+        .then(res=>{
+          if (res.data.insertedId) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "User Sign Up Successfull!",
+              showConfirmButton: false,
+              timer: 1500
+            });
+            
+            const user = userCredential.user;
+            console.log(user);
+            reset();
+          }
+        })
         // ...
         updateUserProfile(data.name, data.photo)
-        .then(()=>{
-            console.log('user profile info updated')
+          .then(() => {
+            console.log("user profile info updated");
             navigate("/");
-        })
-        .catch(error=>{
+          })
+          .catch((error) => {
             console.log(error);
-        })
+          });
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
       });
-    
   };
 
   return (
@@ -59,9 +78,9 @@ const SignUp = () => {
         height: "100%",
       }}
     >
-        <Helmet>
+      <Helmet>
         <title>Bistro Boss | Sign Up</title>
-        </Helmet>
+      </Helmet>
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row min-h-screen">
           {/* Left Side: Image Section */}
@@ -197,14 +216,18 @@ const SignUp = () => {
                     />
                     <button
                       type="button"
-                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      onClick={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
                       className="absolute right-3 top-2 text-gray-500"
                     >
                       {showConfirmPassword ? "Hide" : "Show"}
                     </button>
                   </div>
                   {errors.confirmPassword && (
-                    <span className="text-red-600">Confirm Password is required</span>
+                    <span className="text-red-600">
+                      Confirm Password is required
+                    </span>
                   )}
                 </div>
 
@@ -234,14 +257,7 @@ const SignUp = () => {
               </div>
 
               {/* Social Login */}
-              <div className="flex justify-center gap-4">
-                <button className="p-3 bg-blue-600 text-white rounded-full hover:bg-blue-700">
-                  <TiSocialFacebook />
-                </button>
-                <button className="p-3 bg-red-500 text-white rounded-full hover:bg-red-600">
-                  <RiGoogleLine />
-                </button>
-              </div>
+              <SocialLogin></SocialLogin>
             </div>
           </div>
         </div>

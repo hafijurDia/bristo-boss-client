@@ -9,6 +9,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import SocialLogin from "../../socialLogin/SocialLogin";
 
 const Login = () => {
     const [disabled, setDisabled] = useState(true);
@@ -158,14 +159,7 @@ const Login = () => {
           </div>
 
           {/* Social Login */}
-          <div className="flex justify-center gap-4">
-            <button className="p-3 bg-blue-600 text-white rounded-full hover:bg-blue-700">
-            <TiSocialFacebook />
-            </button>
-            <button className="p-3 bg-red-500 text-white rounded-full hover:bg-red-600">
-            <RiGoogleLine />
-            </button>
-          </div>
+        <SocialLogin></SocialLogin>
         </div>
       </div>
     </div>

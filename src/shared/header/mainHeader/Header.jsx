@@ -10,7 +10,6 @@ const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
   const [cart] = UseCart();
-
   const handleLogout = () => {
     logOut()
       .then(() => {

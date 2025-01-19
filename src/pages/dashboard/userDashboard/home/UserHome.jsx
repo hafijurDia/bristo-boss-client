@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { FaShopify, FaUtensils } from "react-icons/fa";
 import { MdOutlineSettingsPhone } from "react-icons/md";
+import UseAuth from "../../../../hooks/useAuth";
+import { AuthContext } from "../../../../providers/AuthProvider";
 
 const UserHome = () => {
+    const {user} = useContext(AuthContext);
   return (
     <div>
       <Helmet>
@@ -12,7 +15,7 @@ const UserHome = () => {
       <div className="w-4/5 mx-auto">
         {/* Welcome Section */}
         <div className="mb-5">
-          <h2 className="text-2xl font-bold">Hi, Welcome Back!</h2>
+          <h2 className="text-2xl font-bold">Hi,<span className="uppercase text-orange-500 pr-2">{user?.displayName}</span> Welcome Back!</h2>
         </div>
 
         {/* Metrics Section */}
