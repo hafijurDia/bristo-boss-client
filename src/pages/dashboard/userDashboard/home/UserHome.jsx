@@ -60,12 +60,12 @@ const UserHome = () => {
           <div className="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow w-full">
             <div className="w-32 h-32 rounded-full bg-blue-500 flex items-center justify-center">
               <img
-                src="https://via.placeholder.com/150"
+                src={user?.photoURL}
                 alt="Profile"
                 className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-lg"
               />
             </div>
-            <h3 className="text-lg font-semibold mt-4">John Doe</h3>
+            <h3 className="text-lg font-semibold mt-4">{user?.displayName}</h3>
           </div>
 
           {/* User Dashboard Section */}

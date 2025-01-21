@@ -31,7 +31,7 @@ const Header = () => {
         </Link>
       </li>
       <li>
-        <Link className="uppercase font-semibold" to="/dashboard">
+        <Link className="uppercase font-semibold" to="/dashboard/home">
           Dashboard
         </Link>
       </li>

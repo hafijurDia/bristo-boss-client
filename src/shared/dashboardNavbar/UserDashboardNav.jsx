@@ -1,11 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
-import { FaHome, FaCalendarAlt, FaHistory, FaShoppingCart, FaStar, FaBook, FaUtensils, FaShopify, FaPhoneAlt } from "react-icons/fa";
+import { FaHome, FaCalendarAlt, FaHistory, FaShoppingCart, FaStar, FaBook, FaUtensils, FaShopify, FaPhoneAlt, FaList, FaUser, FaUsers } from "react-icons/fa";
 import UseCart from "../../hooks/useCart";
+import UseAdmin from "../../hooks/useAdmin";
 
 const UserDashboardNav = () => {
     const [cart] = UseCart();
+    const [isAdmin] = UseAdmin();
+
   return (
     <div>
       <div className="drawer lg:drawer-open">
@@ -33,7 +36,33 @@ const UserDashboardNav = () => {
             </div>
 
             {/* User Links */}
+            {
+              isAdmin ? <>
+              <li>
+              <NavLink to="/dashboard/home" activeClassName="font-bold" className="text-base">
+                <FaHome className="mr-2" /> Admin Home
+              </NavLink>
+            </li>
             <li>
+              <NavLink to="/dashboard/add-item" activeClassName="font-bold" className="text-base">
+                <FaUtensils className="mr-2" /> Add Items
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/manage-item" activeClassName="font-bold" className="text-base">
+                <FaList className="mr-2" /> Manage Items
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/users" activeClassName="font-bold" className="text-base">
+                <FaUsers className="mr-2" /> ALl Users
+              </NavLink>
+            </li>
+            
+              </> 
+              : 
+              <>
+              <li>
               <NavLink to="/dashboard/home" activeClassName="font-bold" className="text-base">
                 <FaHome className="mr-2" /> User Home
               </NavLink>
@@ -63,6 +92,8 @@ const UserDashboardNav = () => {
                 <FaBook className="mr-2" /> My Booking
               </NavLink>
             </li>
+              </>
+            }
 
             {/* Divider */}
             <hr className="my-4 border-gray-300" />

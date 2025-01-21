@@ -4,6 +4,7 @@ import UserDashboardNav from '../shared/dashboardNavbar/UserDashboardNav';
 import { Outlet } from 'react-router-dom';
 
 const UserDashboard = () => {
+    
   return (
     <div className="bg-gray-200 min-h-screen flex">
       {/* Sidebar */}
