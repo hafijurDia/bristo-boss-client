@@ -11,6 +11,8 @@ import UserDashboard from "../layouts/UserDashboard";
 import UserHome from "../pages/dashboard/userDashboard/home/UserHome";
 import Contact from "../pages/contact/Contact";
 import AllUsers from "../pages/dashboard/userDashboard/allUsers/AllUsers";
+import AdminRoute from "./AdminRoute";
+import AddItems from "../pages/dashboard/userDashboard/addItems/AddItems";
 
 export const router = createBrowserRouter([
   {
@@ -57,8 +59,12 @@ export const router = createBrowserRouter([
         element: <Usercart></Usercart>,
       },
       {
+        path:"/dashboard/add-item",
+        element: <AdminRoute><AddItems></AddItems></AdminRoute>
+      },
+      {
         path: "/dashboard/users",
-        element: <AllUsers></AllUsers>,
+        element: <AdminRoute><AllUsers></AllUsers></AdminRoute>,
       },
     ]
   },

@@ -18,7 +18,6 @@ const ReconmendedItem = () => {
         setMenu(reconmendedItem);
       });
   }, []);
-  console.log(menu);
   return (
     <div className="my-20">
       <div className="container mx-auto">

@@ -16,7 +16,7 @@ const OurShop = () => {
   const {category} = useParams();
   const initialIndex = categories.indexOf(category);
   const [tabIndex, setTabIndex] = useState(initialIndex);
-  const [menu, loading] = useMenu(); // Destructure loading state from useMenu
+  const [menu, loading, refetch] = useMenu(); // Destructure loading state from useMenu
 
   console.log(category);
   const offered = menu.filter((item) => item.category === "offered");
@@ -49,19 +49,19 @@ const OurShop = () => {
               <Tab>Drinks</Tab>
             </TabList>
             <TabPanel>
-    <OrderTab items={salads} loading={loading}></OrderTab>
+    <OrderTab items={salads} loading={loading} refetch={refetch}></OrderTab>
 </TabPanel>
 <TabPanel>
-    <OrderTab items={pizza} loading={loading}></OrderTab>
+    <OrderTab items={pizza} loading={loading} refetch={refetch}></OrderTab>
 </TabPanel>
 <TabPanel>
-    <OrderTab items={soups} loading={loading}></OrderTab>
+    <OrderTab items={soups} loading={loading} refetch={refetch}></OrderTab>
 </TabPanel>
 <TabPanel>
-    <OrderTab items={desserts} loading={loading}></OrderTab>
+    <OrderTab items={desserts} loading={loading} refetch={refetch}></OrderTab>
 </TabPanel>
 <TabPanel>
-    <OrderTab items={drinks} loading={loading}></OrderTab>
+    <OrderTab items={drinks} loading={loading} refetch={refetch}></OrderTab>
 </TabPanel>
           </Tabs>
         </div>

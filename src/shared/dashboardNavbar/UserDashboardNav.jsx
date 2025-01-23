@@ -39,22 +39,22 @@ const UserDashboardNav = () => {
             {
               isAdmin ? <>
               <li>
-              <NavLink to="/dashboard/home" activeClassName="font-bold" className="text-base">
+              <NavLink to="/dashboard/home" className="text-base">
                 <FaHome className="mr-2" /> Admin Home
               </NavLink>
             </li>
             <li>
-              <NavLink to="/dashboard/add-item" activeClassName="font-bold" className="text-base">
+              <NavLink to="/dashboard/add-item"  className="text-base">
                 <FaUtensils className="mr-2" /> Add Items
               </NavLink>
             </li>
             <li>
-              <NavLink to="/dashboard/manage-item" activeClassName="font-bold" className="text-base">
+              <NavLink to="/dashboard/manage-item" className="text-base">
                 <FaList className="mr-2" /> Manage Items
               </NavLink>
             </li>
             <li>
-              <NavLink to="/dashboard/users" activeClassName="font-bold" className="text-base">
+              <NavLink to="/dashboard/users" className="text-base">
                 <FaUsers className="mr-2" /> ALl Users
               </NavLink>
             </li>
@@ -63,32 +63,32 @@ const UserDashboardNav = () => {
               : 
               <>
               <li>
-              <NavLink to="/dashboard/home" activeClassName="font-bold" className="text-base">
+              <NavLink to="/dashboard/home" className="text-base">
                 <FaHome className="mr-2" /> User Home
               </NavLink>
             </li>
             <li>
-              <NavLink to="/dashboard/reservation" activeClassName="font-bold" className="text-base">
+              <NavLink to="/dashboard/reservation" className="text-base">
                 <FaCalendarAlt className="mr-2" /> Reservation
               </NavLink>
             </li>
             <li>
-              <NavLink to="/dashboard/payment-history" activeClassName="font-bold" className="text-base">
+              <NavLink to="/dashboard/payment-history" className="text-base">
                 <FaHistory className="mr-2" /> Payment History
               </NavLink>
             </li>
             <li>
-              <NavLink to="/dashboard/cart" activeClassName="font-bold" className="text-base">
+              <NavLink to="/dashboard/cart" className="text-base">
                 <FaShoppingCart className="mr-2" /> My Cart ({cart.length})
               </NavLink>
             </li>
             <li>
-              <NavLink to="/dashboard/add-review" activeClassName="font-bold" className="text-base">
+              <NavLink to="/dashboard/add-review" className="text-base">
                 <FaStar className="mr-2" /> Add Review
               </NavLink>
             </li>
             <li>
-              <NavLink to="/dashboard/my-booking" activeClassName="font-bold" className="text-base">
+              <NavLink to="/dashboard/my-booking" className="text-base">
                 <FaBook className="mr-2" /> My Booking
               </NavLink>
             </li>
@@ -100,22 +100,22 @@ const UserDashboardNav = () => {
 
             {/* General Links */}
             <li>
-              <NavLink to="/" activeClassName="font-bold" className="text-base">
+              <NavLink to="/"  className="text-base">
                 <FaHome className="mr-2" /> Home
               </NavLink>
             </li>
             <li>
-              <NavLink to="/menu" activeClassName="font-bold" className="text-base">
+              <NavLink to="/menu"  className="text-base">
                 <FaUtensils className="mr-2" /> Menu
               </NavLink>
             </li>
             <li>
-              <NavLink to="/shop/salads" activeClassName="font-bold" className="text-base">
+              <NavLink to="/shop/salads"  className="text-base">
                 <FaShopify className="mr-2" /> Shop
               </NavLink>
             </li>
             <li>
-              <NavLink to="/contact" activeClassName="font-bold" className="text-base">
+              <NavLink to="/contact"  className="text-base">
                 <FaPhoneAlt className="mr-2" /> Contact
               </NavLink>
             </li>

@@ -3,10 +3,11 @@ import { Helmet } from "react-helmet-async";
 import { FaShopify, FaUtensils } from "react-icons/fa";
 import { MdOutlineSettingsPhone } from "react-icons/md";
 import UseAuth from "../../../../hooks/useAuth";
-import { AuthContext } from "../../../../providers/AuthProvider";
+
 
 const UserHome = () => {
-    const {user} = useContext(AuthContext);
+    const {user} = UseAuth();
+    console.log('user photo',user.photoURL)
   return (
     <div>
       <Helmet>
@@ -66,6 +67,7 @@ const UserHome = () => {
               />
             </div>
             <h3 className="text-lg font-semibold mt-4">{user?.displayName}</h3>
+            <h3 className="text-lg font-semibold mt-4">{user?.email}</h3>
           </div>
 
           {/* User Dashboard Section */}
