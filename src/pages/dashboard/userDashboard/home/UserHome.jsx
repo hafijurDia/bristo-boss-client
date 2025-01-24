@@ -3,10 +3,12 @@ import { Helmet } from "react-helmet-async";
 import { FaShopify, FaUtensils } from "react-icons/fa";
 import { MdOutlineSettingsPhone } from "react-icons/md";
 import UseAuth from "../../../../hooks/useAuth";
+import useMenu from "../../../../hooks/useMenu";
 
 
 const UserHome = () => {
     const {user} = UseAuth();
+    const [menu] = useMenu();
     console.log('user photo',user.photoURL)
   return (
     <div>
@@ -27,7 +29,7 @@ const UserHome = () => {
               <FaUtensils />
             </div>
             <div>
-              <div className="text-2xl font-bold">205</div>
+              <div className="text-2xl font-bold">{menu.length}</div>
               <div className="text-sm text-gray-600">Menu</div>
             </div>
           </div>

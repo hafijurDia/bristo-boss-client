@@ -31,7 +31,7 @@ const AddItems = () => {
                 name: data.recipeName,
                 recipe: data.recipeDetails,
                 image: res.data.data.display_url,
-                categroy: data.category,
+                category: data.category,
                 price: parseFloat(data.price),
             }
             const menuRes = await axiosSecure.post('/menu', menuItem)
@@ -93,7 +93,7 @@ const AddItems = () => {
               <option value="pizza">Pizza</option>
               <option value="dessert">Dessert</option>
               <option value="soup">Soup</option>
-              <option value="drink">Drink</option>
+              <option value="drinks">Drink</option>
             </select>
             {errors.category && <p className="text-red-500 text-sm mt-1">{errors.category.message}</p>}
           </div>
