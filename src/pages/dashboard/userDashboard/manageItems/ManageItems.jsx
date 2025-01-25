@@ -4,10 +4,53 @@ import SectionTitle from "../../../../shared/components/SectionTitle";
 import useMenu from "../../../../hooks/useMenu";
 import { FaEdit, FaUsers } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import UseAxiosSecure from "../../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const ManageItems = () => {
-  const [menu, loading] = useMenu();
-  console.log(menu);
+  const [menu, loading, refetch] = useMenu();
+  const axiosSecure = UseAxiosSecure();
+
+  const handleDelete =(item) => {
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success",
+          cancelButton: "btn btn-danger"
+        },
+        buttonsStyling: false
+      });
+      swalWithBootstrapButtons.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true
+      }).then(async(result) => {
+        if (result.isConfirmed) {
+            const res = await axiosSecure.delete(`/menu/${item._id}`);
+            if (res.data.deletedCount > 0) {
+                refetch();
+                swalWithBootstrapButtons.fire({
+                  title: "Deleted!",
+                  text: "Your file has been deleted.",
+                  icon: "success"
+                });
+            }
+           
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire({
+            title: "Cancelled",
+            text: "Your imaginary file is safe :)",
+            icon: "error"
+          });
+        }
+      });
+  }
   return (
     <div>
       <Helmet>
@@ -57,6 +100,7 @@ const ManageItems = () => {
                     </td>
                     <td>
                       <button
+                      onClick={()=>handleDelete(item)}
                         className="btn btn-ghost btn-xs bg-red-600 w-[40px] h-[40px] hover:bg-black"
                         title="Delete User"
                       >
