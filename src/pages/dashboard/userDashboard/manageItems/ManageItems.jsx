@@ -6,6 +6,7 @@ import { FaEdit, FaUsers } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import UseAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const ManageItems = () => {
   const [menu, loading, refetch] = useMenu();
@@ -91,12 +92,12 @@ const ManageItems = () => {
                     <td>{item.name}</td>
                     <td>${item.price}</td>
                     <td>
-                      <button
+                      <Link to={`/dashboard/update-item/${item._id}`}><button
                         className="btn btn-ghost btn-xs bg-orange-600 w-[40px] h-[40px] hover:bg-black"
                         title="Promote to Admin"
                       >
                         <FaEdit className="text-3xl p-1 text-white" />
-                      </button>
+                      </button></Link>
                     </td>
                     <td>
                       <button
