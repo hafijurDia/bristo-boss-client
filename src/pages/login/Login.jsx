@@ -16,6 +16,7 @@ const Login = () => {
     const {signIn} = useContext(AuthContext);
     const navigate = useNavigate();
     const location  = useLocation();
+    const [error, setError] = useState('');
 
     const from = location.state?.from?.pathname || "/";
     console.log(location.state);
@@ -25,7 +26,6 @@ const Login = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
         signIn(email, password)
         .then((userCredential) => {
             // Signed in 
@@ -43,7 +43,7 @@ const Login = () => {
           .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            console.log(errorMessage)
+            setError(errorMessage);
           });
 
     }
@@ -98,6 +98,7 @@ const Login = () => {
               type="email"
               id="email"
               name="email"
+              required
               placeholder="Enter your email"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -112,9 +113,11 @@ const Login = () => {
               type="password"
               id="password"
               name="password"
+              required
               placeholder="Enter your password"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+          {error?<><p className="text-base text-red-700">{'Your username or password wrong!'}</p></>:<></>}
           </div>
 
           {/* reCAPTCHA Placeholder */}

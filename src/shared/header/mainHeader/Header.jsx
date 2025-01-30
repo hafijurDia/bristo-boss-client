@@ -5,9 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { FaRegUserCircle, FaShoppingCart } from "react-icons/fa";
 import UseCart from "../../../hooks/useCart";
+import UseAdmin from "../../../hooks/useAdmin";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [isAdmin] = UseAdmin();
   const navigate = useNavigate();
   const [cart] = UseCart();
   const handleLogout = () => {
@@ -30,11 +32,9 @@ const Header = () => {
           Contact Us
         </Link>
       </li>
-      <li>
-        <Link className="uppercase font-semibold" to="/dashboard/home">
-          Dashboard
-        </Link>
-      </li>
+
+   
+
       <li>
         <Link className="uppercase font-semibold" to="/menu">
           Our Menu
@@ -53,6 +53,13 @@ const Header = () => {
      
         </Link>
       </li>
+      {
+  user && isAdmin &&  <li><Link className="uppercase font-semibold" to="/dashboard/adminHome">Dashboard</Link></li> 
+}
+{
+  user && !isAdmin &&  <li><Link className="uppercase font-semibold" to="/dashboard/home">Dashboard</Link></li> 
+}
+   
       {user ? (
         <>
           <li>
