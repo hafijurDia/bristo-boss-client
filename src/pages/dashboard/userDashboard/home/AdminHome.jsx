@@ -1,15 +1,29 @@
 import React, { useContext } from "react";
 import { Helmet } from "react-helmet-async";
-import { FaShopify, FaUtensils } from "react-icons/fa";
+import { FaShopify, FaUsers, FaUtensils } from "react-icons/fa";
 import { MdOutlineSettingsPhone } from "react-icons/md";
 import UseAuth from "../../../../hooks/useAuth";
 import useMenu from "../../../../hooks/useMenu";
+import { useQuery } from "@tanstack/react-query";
+import UseAxiosSecure from "../../../../hooks/useAxiosSecure";
+import { LuWallet } from "react-icons/lu";
+import { SiCodechef } from "react-icons/si";
+import { CiDeliveryTruck } from "react-icons/ci";
 
 
 const AdminHome = () => {
     const {user} = UseAuth();
     const [menu] = useMenu();
-    console.log('user photo',user.photoURL)
+    const axiosSecure = UseAxiosSecure();
+
+    const {data: stats, refetch} = useQuery({
+      queryKey: ['admin-stats'],
+      queryFn: async()=>{
+        const res = await axiosSecure.get('/admin-stats');
+        return res.data;
+      }
+    })
+    console.log('info',stats);
   return (
     <div>
       <Helmet>
@@ -22,39 +36,52 @@ const AdminHome = () => {
         </div>
 
         {/* Metrics Section */}
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
           {/* Total Orders */}
-          <div className="flex justify-center items-center bg-blue-100 p-4 rounded-lg shadow w-full">
-            <div className="text-4xl text-blue-600 mr-4">
-              <FaUtensils />
+          <div className="flex justify-center items-center bg-indigo-700 p-4 rounded-lg shadow w-full">
+            <div className="text-4xl text-white mr-4">
+            <LuWallet />
             </div>
             <div>
-              <div className="text-2xl font-bold">{menu.length}</div>
-              <div className="text-sm text-gray-600">Menu</div>
+              <div className="text-2xl font-bold text-white">{stats?.revenue}</div>
+              <div className="text-sm text-white">Revenue</div>
             </div>
           </div>
 
           {/* Total Price */}
-          <div className="flex justify-center items-center bg-green-100 p-4 rounded-lg shadow w-full">
-            <div className="text-4xl text-green-600 mr-4">
-              <FaShopify />
+          <div className="flex justify-center items-center bg-orange-700 p-4 rounded-lg shadow w-full">
+            <div className="text-4xl text-white mr-4">
+            <FaUsers />
             </div>
             <div>
-              <div className="text-2xl font-bold">103</div>
-              <div className="text-sm text-gray-600">Shop</div>
+              <div className="text-2xl font-bold text-white">{stats?.users}</div>
+              <div className="text-sm text-gray-600 text-white">Customers</div>
             </div>
           </div>
 
-          {/* Contact Button */}
-          <div className="flex justify-center items-center bg-purple-100 p-4 rounded-lg shadow w-full">
-            <div className="text-4xl text-purple-600 mr-4">
-              <MdOutlineSettingsPhone />
+          {/* Total Price */}
+          <div className="flex justify-center items-center bg-green-700 p-4 rounded-lg shadow w-full">
+            <div className="text-4xl text-white mr-4">
+            <SiCodechef />
             </div>
             <div>
-              <div className="text-2xl font-bold">03</div>
-              <div className="text-sm text-gray-600">Contact</div>
+              <div className="text-2xl font-bold text-white">{stats?.menus}</div>
+              <div className="text-sm text-white">Products</div>
             </div>
           </div>
+
+          {/* Total Price */}
+          <div className="flex justify-center items-center bg-cyan-700 p-4 rounded-lg shadow w-full">
+            <div className="text-4xl text-white mr-4">
+            <CiDeliveryTruck />
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-white">{stats?.orders}</div>
+              <div className="text-sm text-white">Orders</div>
+            </div>
+          </div>
+
+       
         </div>
 
         {/* Profile Section */}
