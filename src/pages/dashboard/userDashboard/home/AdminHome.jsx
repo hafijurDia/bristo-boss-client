@@ -9,27 +9,70 @@ import UseAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { LuWallet } from "react-icons/lu";
 import { SiCodechef } from "react-icons/si";
 import { CiDeliveryTruck } from "react-icons/ci";
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid,PieChart, Pie, Sector, ResponsiveContainer, Legend } from 'recharts';
 
+const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', 'red', 'pink'];
+
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042','red'];
 
 const AdminHome = () => {
     const {user} = UseAuth();
     const [menu] = useMenu();
     const axiosSecure = UseAxiosSecure();
 
-    const {data: stats, refetch} = useQuery({
+    const {data: stats = {}, refetch} = useQuery({
       queryKey: ['admin-stats'],
       queryFn: async()=>{
         const res = await axiosSecure.get('/admin-stats');
         return res.data;
       }
     })
-    console.log('info',stats);
+   
+    const {data: chartdata=[]} = useQuery({
+      queryKey:['order-stats'],
+      queryFn: async()=>{
+        const res = await axiosSecure.get('/order-stats');
+        return res.data;
+      }
+    })
+
+    //custom shape for the bar chart
+    const getPath = (x, y, width, height) => {
+      return `M${x},${y + height}C${x + width / 3},${y + height} ${x + width / 2},${y + height / 3}
+      ${x + width / 2}, ${y}
+      C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${y + height} ${x + width}, ${y + height}
+      Z`;
+    };
+    
+    const TriangleBar = (props) => {
+      const { fill, x, y, width, height } = props;
+    
+      return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
+    };
+
+    //custom shape for the pie chart
+    const RADIAN = Math.PI / 180;
+const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+  return (
+    <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+      {`${(percent * 100).toFixed(0)}%`}
+    </text>
+  );
+};
+
+const piechartdata = chartdata.map(data=>{
+  return {name: data.category, value: data.revenue}
+})
   return (
     <div>
       <Helmet>
         <title>Bistro Boss | Admin Home</title>
       </Helmet>
-      <div className="w-4/5 mx-auto">
+      <div className="w-full mx-auto">
         {/* Welcome Section */}
         <div className="mb-5">
           <h2 className="text-2xl font-bold">Hi,<span className="uppercase text-orange-500 pr-2">{user?.displayName}</span> Welcome Back!</h2>
@@ -43,7 +86,7 @@ const AdminHome = () => {
             <LuWallet />
             </div>
             <div>
-              <div className="text-2xl font-bold text-white">{stats?.revenue}</div>
+              <div className="text-2xl font-bold text-white">$ {stats?.revenue}</div>
               <div className="text-sm text-white">Revenue</div>
             </div>
           </div>
@@ -88,26 +131,47 @@ const AdminHome = () => {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 my-5">
           {/* Profile Picture and Name */}
           <div className="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow w-full">
-            <div className="w-32 h-32 rounded-full bg-blue-500 flex items-center justify-center">
-              <img
-                src={user?.photoURL}
-                alt="Profile"
-                className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-lg"
-              />
-            </div>
-            <h3 className="text-lg font-semibold mt-4">{user?.displayName}</h3>
-            <h3 className="text-lg font-semibold mt-4">{user?.email}</h3>
+          <BarChart
+      width={500}
+      height={300}
+      data={chartdata}
+      margin={{
+        top: 20,
+        right: 30,
+        left: 20,
+        bottom: 5,
+      }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="category" className="capitalize"/>
+      <YAxis />
+      <Bar dataKey="quantity" fill="#8884d8" shape={<TriangleBar />} label={{ position: 'top' }}>
+        {chartdata.map((entry, index) => (
+          <Cell key={`cell-${index}`} fill={colors[index % 20]} />
+        ))}
+      </Bar>
+    </BarChart>
           </div>
 
           {/* User Dashboard Section */}
           <div className="bg-gray-50 rounded-lg p-6 shadow w-full">
-            <h2 className="text-xl font-bold mb-4 text-gray-700">Admin Activities</h2>
-            <ul className="space-y-3 text-gray-700">
-              <li className="px-4 py-2">Orders</li>
-              <li className="px-4 py-2">Reviews</li>
-              <li className="px-4 py-2">Bookings</li>
-              <li className="px-4 py-2">Payments</li>
-            </ul>
+          <PieChart width={400} height={400}>
+          <Pie
+            data={piechartdata}
+            cx="50%"
+            cy="50%"
+            labelLine={false}
+            label={renderCustomizedLabel}
+            outerRadius={80}
+            fill="#8884d8"
+            dataKey="value"
+          >
+            {piechartdata.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Pie>
+          <Legend className="capitalize"></Legend>
+        </PieChart>
           </div>
         </div>
       </div>
